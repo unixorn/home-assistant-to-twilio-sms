@@ -1,0 +1,26 @@
+ - id: water_alert_demo
+   alias: 'SMS via twilio when the basement floor is wet'
+   trigger:
+     platform: state
+     entity_id: binary_sensor.water_01_zone
+     from: "off"
+     to: "on"
+   action:
+   - service: shell_command.twilio_sms
+     data:
+       body: Water detected in the basement under the heater.
+       recipient_number: !secret demo_phone
+       twilio_number: !secret twilio_number
+ - id: water_alert_all_clear_demo
+   alias: 'SMS via Twilio when the basement floor is dry again'
+   trigger:
+     platform: state
+     entity_id: binary_sensor.water_01_zone
+     from: "on"
+     to: "off"
+   action:
+   - service: shell_command.twilio_sms
+     data:
+       body: Water no longer detected in the basement under the heater.
+       recipient_number: !secret demo_phone
+       twilio_number: !secret twilio_number
