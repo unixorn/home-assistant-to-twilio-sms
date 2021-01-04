@@ -1,0 +1,2 @@
+shell_command:
+  twilio_sms: "/config/helpers/send-sms '{{ recipient_number }}' '{{ body }}' 'twilio_number:{{twilio_number}}'"
